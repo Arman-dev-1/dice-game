@@ -3,11 +3,12 @@ import cors from "cors";
 import crypto from "crypto";
 
 const app = express();
+const port = process.env.PORT || 3001;
 app.use(express.json());
 app.use(cors()); // Enable CORS for frontend access
 
 /**
- * 🎲 Roll Dice API
+ * Roll Dice API
  * Receives: publicSeed from frontend
  * Returns: hash, dice roll, and secretSeed for verification
  */
@@ -23,7 +24,7 @@ app.post("/roll-dice", (req, res) => {
 });
 
 /**
- * ✅ Verify Fairness API
+ * Verify Fairness API
  * Receives: publicSeed & secretSeed
  * Returns: computed hash (should match original hash)
  */
@@ -35,4 +36,5 @@ app.post("/verify-roll", (req, res) => {
   res.json({ computedHash });
 });
 
-app.listen(3001, () => console.log("🎲 Dice Game Backend running on http://localhost:3001"));
+app.listen(port, () => console.log(`Dice Game Backend running on http://localhost:${port}`));
+
